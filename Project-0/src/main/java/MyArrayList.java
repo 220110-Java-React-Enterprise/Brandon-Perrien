@@ -5,7 +5,7 @@ package src.main.java;
  * Default size is 2, grows by size * 2 when needed.
  * When an element is added or removed at an index other elements are not re-arranged.
  *
- * @param <e>
+ * @param <E>
  */
 public class MyArrayList<E> implements MyListInterface<E> {
     private Object[] array;
@@ -28,7 +28,7 @@ public class MyArrayList<E> implements MyListInterface<E> {
     public MyArrayList(int size) {
         maxSize = size;
         size = 0;
-        array = new Object[size];
+        array = new Object[maxSize];
     }
 
     /**
@@ -53,8 +53,11 @@ public class MyArrayList<E> implements MyListInterface<E> {
      */
     @Override
     public void add(Object o) {
-        //Implement this method
         // NOTE: if size >= maxSize we need to grow array
+            if(size >= maxSize){
+                growArray();
+            }
+            array[size++] = o;
     }
 
     /**
@@ -66,8 +69,19 @@ public class MyArrayList<E> implements MyListInterface<E> {
      */
     @Override
     public void add(E e, int index) throws IndexOutOfBoundsException {
-        //Implement this method
+        if (index <= size) {
+            array[index] = e;
+
+            if (index == size) {
+                size++;
+            } else {
+                throw new IndexOutOfBoundsException();
+            }
+        }
     }
+
+
+
 
     /**
      * gets the object located at supplied index
@@ -77,7 +91,13 @@ public class MyArrayList<E> implements MyListInterface<E> {
      */
     @Override
     public E get(int index) throws IndexOutOfBoundsException{
-        //Implement this method
+        if(index <= array.length - 1){
+            return (E) array[index];
+        }else{
+            throw new IndexOutOfBoundsException("You know what you did.");
+        }
+
+
     }
 
     /**
@@ -86,7 +106,14 @@ public class MyArrayList<E> implements MyListInterface<E> {
      */
     @Override
     public void clear() {
-        //Implement this method
+       for(int i = 0; i < size; i++){
+            array[i] = null;
+        }
+       //or just
+        //maxSize = 2;
+        //size = 0;
+        //array = new Object[maxSize];
+
     }
 
     /**
@@ -96,7 +123,13 @@ public class MyArrayList<E> implements MyListInterface<E> {
      */
     @Override
     public int contains(Object o) {
-        //Implement this method
+        for(int i = 0; i < size; i++){
+            if(o.equals(array[i])){
+                return i;
+            }
+        }
+        return -1;
+
     }
 
     /**
@@ -105,7 +138,10 @@ public class MyArrayList<E> implements MyListInterface<E> {
      */
     @Override
     public void remove(int index) {
-        //Implement this method
+        //if statement, so it doesn't run into indexoutofbounds
+        if(index < size) {
+            array[index] = null;
+        }
     }
 
     /**
@@ -115,7 +151,12 @@ public class MyArrayList<E> implements MyListInterface<E> {
      */
     @Override
     public int size() {
-        //Implement this method
+        //this is the same as just returning size. Should we count null entries if they are at the end of the ArrayList
+        int count = 0;
+        for(int i = 0; i < size; i++) {
+                count++;
+        }
+        return count;
     }
 
 
