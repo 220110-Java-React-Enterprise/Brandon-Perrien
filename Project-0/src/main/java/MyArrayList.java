@@ -61,21 +61,41 @@ public class MyArrayList<E> implements MyListInterface<E> {
     }
 
     /**
-     * Adds object at specified index, advancing the size of the underlying array. This will
-     * overwrite an existing element, rather than shift them
+     * Adds object at specified index, advancing the size of the underlying array.
+     * Will Shift later elements
      * @param index index location where object will be inserted
      * @param e element to be inserted
      * @throws IndexOutOfBoundsException
      */
     @Override
     public void add(E e, int index) throws IndexOutOfBoundsException {
-        if (index <= size) {
-            array[index] = e;
+        if(index >= size){
+            throw new IndexOutOfBoundsException();
+        }
 
-            if (index == size) {
+        if(index < size -1){
+            for(int i = size -1; i >= index; i--){
+                if(i == index){
+                    array[i] = e;
+                }else if(array[i] != null){
+                    growArray();
+                    array[i+1]=array[i];
+                    array[i] = array[i-1];
+                    if(i == size -1){
+                        size++;
+                    }
+                }
+            }
+        }
+        if(index == size -1){
+            if(array[index]==null){
+                array[index]=e;
                 size++;
-            } else {
-                throw new IndexOutOfBoundsException();
+            }else{
+                growArray();
+                array[index+1] = array[index];
+                array[index] = e;
+                size++;
             }
         }
     }
@@ -106,13 +126,9 @@ public class MyArrayList<E> implements MyListInterface<E> {
      */
     @Override
     public void clear() {
-       for(int i = 0; i < size; i++){
-            array[i] = null;
-        }
-       //or just
-        //maxSize = 2;
-        //size = 0;
-        //array = new Object[maxSize];
+        maxSize = 2;
+        size = 0;
+        array = new Object[maxSize];
 
     }
 
@@ -133,14 +149,26 @@ public class MyArrayList<E> implements MyListInterface<E> {
     }
 
     /**
-     * Removes object at specified index from underlying array, setting to null.
+     * Removes object at specified index from underlying array.
+     * will shift array, making it smaller
      * @param index index of object to remove from array
      */
     @Override
     public void remove(int index) {
-        //if statement, so it doesn't run into indexoutofbounds
-        if(index < size) {
+        if(index <= size) {
             array[index] = null;
+            if (index < size - 1) {
+                Object[] tempArray = array;
+                array = new Object[maxSize];
+                for (int i = 0; i < size; i++) {
+                    array[i] = tempArray[i];
+                    if (array[i] == null) {
+                        array[i] = tempArray[i + 1];
+                        tempArray[i + 1] = null;
+                    }
+                }
+            }
+            size--;
         }
     }
 
@@ -151,12 +179,7 @@ public class MyArrayList<E> implements MyListInterface<E> {
      */
     @Override
     public int size() {
-        //this is the same as just returning size. Should we count null entries if they are at the end of the ArrayList
-        int count = 0;
-        for(int i = 0; i < size; i++) {
-                count++;
-        }
-        return count;
+        return size;
     }
 
 

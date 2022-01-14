@@ -2,43 +2,53 @@ package src.main.java;
 
 public class Main {
     public static void main(String[] args) {
-        //only the size parameter constructor doesn't work!
-        MyArrayList<String> testArr = new MyArrayList<>();
-        //test add - seems to work
+        //myarraylist(size: 0) doesnt work but i dont think it is supposed to
+        MyArrayList<String> testArr = new MyArrayList<>(1);
+        //test add - works
         testArr.add("Hello");
         testArr.add("Why");
         testArr.add("Three");
+        testArr.add("Index 4");
+        //test add at index - works
+        testArr.add("Diffo", 0);
 
-        //test add at index - this seems to work as well
-        testArr.add("Diffo", 3);
-        testArr.add("Easy", 1);
 
-        //test get  - get seems to be fine
+
+        //test get  -works
        System.out.println(testArr.get(0));
         System.out.println(testArr.get(1));
         System.out.println(testArr.get(2));
         System.out.println(testArr.get(3));
+        System.out.println(testArr.get(4));
+        System.out.println(testArr.get(5));
+        System.out.println(testArr.get(6));
+        System.out.println(testArr.get(7));
 
-//test contains - good
-        System.out.println(testArr.contains("Three"));
-        //test size - this should be working as well
+        //test size - works
         System.out.println(testArr.size());
 
-        //test remove - this works
-        testArr.remove(3);
-        System.out.println(testArr.get(0));
-        System.out.println(testArr.get(1));
-        System.out.println(testArr.get(2));
-        System.out.println(testArr.get(3));
-        System.out.println(testArr.size());
+        //test remove - works
+        testArr.remove(1);
+
+
+        testArr.remove(2);
+
+        testArr.remove(2);
+
+     System.out.println(testArr.get(0));
+     System.out.println(testArr.get(1));
+     System.out.println(testArr.get(2));
+     System.out.println(testArr.get(3));
+     System.out.println(testArr.get(4));
+     System.out.println(testArr.get(5));
+     System.out.println(testArr.get(6));
+     System.out.println(testArr.get(7));
+     System.out.println(testArr.size());
 
 
         //test clear - this works
         testArr.clear();
-        System.out.println(testArr.get(0));
-        System.out.println(testArr.get(1));
-        System.out.println(testArr.get(2));
-        System.out.println(testArr.get(3));
+        System.out.println(testArr.size());
 
 
 
