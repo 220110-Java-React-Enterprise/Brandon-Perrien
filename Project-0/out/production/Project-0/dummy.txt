@@ -1,5 +1,0 @@
-also, a dummy file
-
-git doesn't track empty folders by default
-
-can get rid of when we add actual files later
