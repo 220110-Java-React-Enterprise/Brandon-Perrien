@@ -78,7 +78,9 @@ public class MyArrayList<E> implements MyListInterface<E> {
                 if(i == index){
                     array[i] = e;
                 }else if(array[i] != null){
-                    growArray();
+                    if(array[size-1] != null){
+                        growArray();
+                    }
                     array[i+1]=array[i];
                     array[i] = array[i-1];
                     if(i == size -1){
