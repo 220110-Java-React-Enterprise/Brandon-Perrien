@@ -7,6 +7,7 @@ package src.main.java;
  *
  * @param <E>
  */
+//go through and comment out/delete methods that aren't used
 public class MyArrayList<E> implements MyListInterface<E> {
     private Object[] array;
     private int size;
