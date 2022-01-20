@@ -1,4 +1,3 @@
-package src.main.java;
 
 public class MainMenu extends View {
     public MainMenu(){
@@ -10,19 +9,32 @@ public class MainMenu extends View {
     public void renderView(){
         //prompt user
         System.out.println("===== Main Menu =====");
-        System.out.println("Enter name: ");
+        System.out.println("Enter 1 to Create an Account");
+        System.out.println("Enter 2 to Login to an existing Account");
 
         //get input
         String in = viewManager.getScanner().nextLine();
 
+        //Navigate to next menus, or exit if wrong command inputted
+        switch(in){
+            case "1":
+                viewManager.navigate("CreateAccount");
+                break;
+            case "2":
+                viewManager.navigate("LogIn");
+                break;
+            default:
+                System.out.println("Invalid Command, exiting program...");
+                viewManager.quit();
+        }
+/*
         //perform validation??
 
         //store this for use later
-        DataStore.setName(in);
+        AccountModel accountModel = new AccountModel();
+        accountModel.setFirstName(in);
 
-        System.out.println("Welcome, " + DataStore.getName());
-
-        //navigate to next menu or quit for now
-        viewManager.quit();
+        System.out.println("Welcome, " + accountModel.getFirstName());
+*/
     }
 }

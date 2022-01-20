@@ -1,4 +1,3 @@
-package src.main.java;
 
 /**
  * A fairly simple arraylist implementation extending custom list interface.

@@ -1,10 +1,11 @@
-package src.main.java;
 
 public class Main {
     public static void main(String... args) {
         ViewManager viewManager = ViewManager.getViewManager();
 
         viewManager.registerView(new MainMenu());
+        viewManager.registerView(new CreateAccount());
+        viewManager.registerView(new LogIn());
 
         viewManager.navigate("MainMenu");
 

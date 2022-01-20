@@ -1,4 +1,4 @@
-package src.main.java;
+
 import java.util.Scanner;
 
 public class ViewManager {
@@ -29,7 +29,7 @@ public class ViewManager {
         //navigates to view at destination
         for (int i = 0; i < viewList.size(); i++) {
             View temp = viewList.get(i);
-            if (temp.viewName.equals(destination)) {
+           if (temp.viewName.equals(destination)) {
                 nextView = temp;
             }
         }
@@ -47,6 +47,9 @@ public class ViewManager {
         }
 
         public void quit(){
+            //changes running to false which will close the loop in main,
+            // also closes the scanner because it is no longer being used at this point
+            scanner.close();
             running = false;
         }
 

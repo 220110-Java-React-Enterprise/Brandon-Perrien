@@ -1,4 +1,4 @@
-package src.main.java;
+
 
 public abstract class View {
     protected String viewName;
