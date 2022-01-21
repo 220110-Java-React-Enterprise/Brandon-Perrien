@@ -27,14 +27,5 @@ public class MainMenu extends View {
                 System.out.println("Invalid Command, exiting program...");
                 viewManager.quit();
         }
-/*
-        //perform validation??
-
-        //store this for use later
-        AccountModel accountModel = new AccountModel();
-        accountModel.setFirstName(in);
-
-        System.out.println("Welcome, " + accountModel.getFirstName());
-*/
     }
 }

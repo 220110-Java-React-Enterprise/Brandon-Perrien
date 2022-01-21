@@ -32,12 +32,12 @@ public class AccountRepo implements DataSourceCRUD<AccountModel> {
     }
 
     @Override
-    public AccountModel read(Integer id) {
-        //reads/returns values for given account id.
+    public AccountModel read(String s) {
+        //reads/returns values for given email.
         try {
-            String sql = "SELECT * FROM accounts WHERE account_id = ?";
+            String sql = "SELECT * FROM accounts WHERE email = ?";
             PreparedStatement pstmt = connection.prepareStatement(sql);
-            pstmt.setInt(1, id);
+            pstmt.setString(1, s);
 
             ResultSet rs = pstmt.executeQuery();
 
@@ -47,6 +47,7 @@ public class AccountRepo implements DataSourceCRUD<AccountModel> {
                 model.setFirstName(rs.getString("first_name"));
                 model.setLastName(rs.getString("last_name"));
                 model.setEmail(rs.getString("email"));
+                model.setPassword(rs.getString("password"));
             }
             return model;
         }catch(SQLException e){

@@ -1,5 +1,3 @@
-
-
 public class AccountModel {
     private Integer id;
     private String firstName;
