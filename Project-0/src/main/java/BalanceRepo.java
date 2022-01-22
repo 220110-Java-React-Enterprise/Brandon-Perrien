@@ -16,13 +16,15 @@ public class BalanceRepo implements DataSourceCRUD<BalanceModel>{
         //Sql statement that adds data to a table
 
         try{
-            String sql = "INSERT INTO bank_accounts (email, account_name, balance) VALUES (?,?,?)";
+            String sql = "INSERT INTO bank_accounts (account_id, email, account_name, balance) VALUES (?,?,?,?)";
             PreparedStatement pstmt = connection.prepareStatement(sql);
-            pstmt.setString(1, model.getEmail());
-            pstmt.setString(2, model.getAccountName());
-            pstmt.setDouble(3, model.getBalance());
+            pstmt.setInt(1, model.getId());
+            pstmt.setString(2, model.getEmail());
+            pstmt.setString(3, model.getAccountName());
+            pstmt.setDouble(4, model.getBalance());
 
             pstmt.executeUpdate();
+
         }catch(SQLException e){
             e.printStackTrace();
         }
@@ -33,7 +35,7 @@ public class BalanceRepo implements DataSourceCRUD<BalanceModel>{
     public BalanceModel read(String s) {
         //reads/returns values for given email.
         try {
-            String sql = "SELECT * FROM bank_accounts WHERE email = ?";
+            String sql = "SELECT * FROM bank_accounts WHERE account_name = ?";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setString(1, s);
 
@@ -41,10 +43,10 @@ public class BalanceRepo implements DataSourceCRUD<BalanceModel>{
 
             BalanceModel model = new BalanceModel();
             while (rs.next()) {
-                model.setId(rs.getInt("account_id"));
                 model.setEmail(rs.getString("email"));
                 model.setAccountName(rs.getString("account_name"));
                 model.setBalance(rs.getDouble("balance"));
+                model.setId(rs.getInt("id"));
             }
             return model;
         }catch(SQLException e){
@@ -57,12 +59,10 @@ public class BalanceRepo implements DataSourceCRUD<BalanceModel>{
     public BalanceModel update(BalanceModel model){
         //Updates/Changes table data member
         try{
-            String sql = "UPDATE bank_accounts SET email = ?, account_name = ?, balance = ? WHERE account_id = ?";
+            String sql = "UPDATE bank_accounts SET balance = ? WHERE account_name = ?";
             PreparedStatement pstmt = connection.prepareStatement(sql);
-            pstmt.setString(1, model.getEmail());
+            pstmt.setDouble(1, model.getBalance());
             pstmt.setString(2, model.getAccountName());
-            pstmt.setDouble(3, model.getBalance());
-            pstmt.setInt(4, model.getId());
 
             pstmt.executeUpdate();
         }catch(SQLException e){

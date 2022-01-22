@@ -12,7 +12,7 @@ account_id INT NOT NULL,
 email VARCHAR(50),
 account_name VARCHAR(50),
 balance DECIMAL (10, 2),
-CONSTRAINT bank_accounts_pk PRIMARY KEY (account_id),
+CONSTRAINT bank_accounts_pk PRIMARY KEY (account_name),
 CONSTRAINT bank_accounts_accounts_fk FOREIGN KEY (account_id) REFERENCES accounts (account_id)
 );
 
@@ -21,4 +21,3 @@ DROP TABLE bank_accounts;
 
 SELECT * FROM accounts;
 SELECT * FROM bank_accounts;
-

@@ -24,22 +24,22 @@ public class AccountMenu extends View{
 
         switch(in){
             case "1":
-               // repo.read(email).getAccountName();
+               // viewManager.navigate();
                 System.out.println("temp");
                 break;
             case "2":
-              /*  System.out.println("Name the account: ");
-                String name = viewManager.getScanner().nextLine();
-                model.setAccountName(name);
-                model.setEmail(email);
+                //Adds a new bank account for the user.
                 model.setBalance(0.00);
-                repo.create(model);*/
-                System.out.println("temp2");
+                System.out.println("Enter a name for this bank account: ");
+                in = viewManager.getScanner().nextLine();
+                model.setAccountName(in);
+                model.setEmail(LogIn.email);
+                model.setId(arepo.read(LogIn.email).getId());
+                repo.create(model);
+                System.out.println("Bank account added.");
                 break;
             case "3":
-                System.out.println("Enter your current email: ");
-                String email = viewManager.getScanner().nextLine();
-                amodel.setId(arepo.read(email).getId());
+                amodel.setId(arepo.read(LogIn.email).getId());
 
                 System.out.println("Enter your First Name: ");
                 in = viewManager.getScanner().nextLine();
@@ -84,7 +84,6 @@ public class AccountMenu extends View{
                 }
 
                 arepo.update(amodel);
-                System.out.println("tempo");
                 break;
             case "4":
                 System.out.println("tempa");

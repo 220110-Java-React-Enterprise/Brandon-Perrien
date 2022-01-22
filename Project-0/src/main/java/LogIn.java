@@ -1,4 +1,6 @@
 public class LogIn extends View{
+    public static String email;
+
     public LogIn(){
         viewName = "LogIn";
         viewManager = ViewManager.getViewManager();
@@ -13,7 +15,7 @@ public class LogIn extends View{
         AccountRepo repo = new AccountRepo();
 
 //verify that there is an account with that email
-       String email = viewManager.getScanner().nextLine();
+       email = viewManager.getScanner().nextLine();
 
        //checks to see if email is in database, if not then it redirects to create an account
         if(repo.read(email).getEmail() == null){
