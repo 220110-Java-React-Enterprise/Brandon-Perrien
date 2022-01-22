@@ -1,13 +1,9 @@
-
 import java.util.Properties;
 import java.sql.Connection;
 import java.io.FileReader;
 import java.sql.DriverManager;
 import java.io.IOException;
 import java.sql.SQLException;
-
-
-
 
 public class ConnectionManager {
     //this is for keeping a connection object alive and referenced and it will be used by this class
@@ -64,9 +60,6 @@ private ConnectionManager(){
             e.printStackTrace();
         }
 
-
         return connection;
     }
-
-
 }

@@ -1,9 +1,7 @@
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-//CRUD interface implementation
 public class AccountRepo implements DataSourceCRUD<AccountModel> {
     private final Connection connection;
 
@@ -30,8 +28,7 @@ public class AccountRepo implements DataSourceCRUD<AccountModel> {
         }
         return model;
     }
-    @Override
-
+    //Overloaded read method, so that email works aswell
     public AccountModel read(String s) {
         //reads/returns values for given email.
         try {
@@ -56,8 +53,8 @@ public class AccountRepo implements DataSourceCRUD<AccountModel> {
         return null;
     }
 
+@Override
 
-    //Overloaded read method, so that account id works aswell
     public AccountModel read(Integer id) {
         //reads/returns values for given email.
         try {

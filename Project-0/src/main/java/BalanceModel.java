@@ -1,16 +1,37 @@
 public class BalanceModel {
     private Integer id;
-    private String email;
     private String accountName;
     private Double balance;
 
     public BalanceModel(){
     }
 
-    public BalanceModel(String email, String accountName, Double balance){
-        this.email = email;
+    public BalanceModel(String accountName, Double balance){
         this.accountName = accountName;
         this.balance = balance;
+    }
+
+
+    public void withdraw(Double d){
+        if(d > 0){
+            if(balance - d > 0){
+                balance = balance - d;
+                setBalance(balance);
+            }else{
+                System.out.println("You cannot withdraw more than your balance.");
+            }
+        }else{
+            System.out.println("You can only withdraw amounts greater than 0.");
+        }
+    }
+
+    public void deposit(Double d){
+        if(d > 0){
+            balance = balance + d;
+            setBalance(balance);
+        }else{
+            System.out.println("You can only deposit amounts greater than 0.");
+        }
     }
 
     public Integer getId() {
@@ -19,14 +40,6 @@ public class BalanceModel {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getAccountName() {

@@ -1,5 +1,3 @@
-
-
 public abstract class View {
     protected String viewName;
     protected ViewManager viewManager;

@@ -1,5 +1,4 @@
 public class VerifyEmail {
-    //This sucks, it works but I should ask if there is a better way
     public static boolean verify(String s) {
         char[] charArr = s.toCharArray();
         //Checks if email address is valid
@@ -18,7 +17,6 @@ public class VerifyEmail {
             }
             return true;
         }
-
         return false;
     }
 }

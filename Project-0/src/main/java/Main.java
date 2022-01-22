@@ -12,6 +12,7 @@ public class Main {
         viewManager.registerView(new CreateAccount());
         viewManager.registerView(new LogIn());
         viewManager.registerView(new AccountMenu());
+        viewManager.registerView(new BankMenu());
 
         viewManager.navigate("MainMenu");
 

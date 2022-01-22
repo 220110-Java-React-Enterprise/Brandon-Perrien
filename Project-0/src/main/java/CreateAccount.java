@@ -1,5 +1,4 @@
 public class CreateAccount extends View{
-
     public CreateAccount(){
         viewName = "CreateAccount";
         viewManager = ViewManager.getViewManager();
@@ -14,7 +13,6 @@ public class CreateAccount extends View{
         //get input
         String in = viewManager.getScanner().nextLine();
 
-        //Instantiating
         AccountModel accountModel = new AccountModel();
         AccountRepo repo = new AccountRepo();
 
@@ -36,8 +34,6 @@ public class CreateAccount extends View{
 
         //prompt user for the rest of their data, then add their info to the database,
         // and then redirect them to the account details menu
-
-        //First Name prompt
         System.out.println("Enter your First Name: ");
         in = viewManager.getScanner().nextLine();
         if(VerifyName.verify(in)) {
@@ -49,7 +45,6 @@ public class CreateAccount extends View{
             return;
         }
 
-        //Last Name prompt
         System.out.println("Enter your Last Name: ");
         in = viewManager.getScanner().nextLine();
         if (VerifyName.verify(in)) {
@@ -61,7 +56,6 @@ public class CreateAccount extends View{
             return;
         }
 
-        //Password Creation
         System.out.println("Create a Password (This must have between 7 and 50 characters): ");
         in = viewManager.getScanner().nextLine();
         if(in.length() < 7 | in.length() > 50){
