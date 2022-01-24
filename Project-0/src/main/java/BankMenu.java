@@ -6,6 +6,8 @@ public class BankMenu extends View{
 
     @Override
     public void renderView(){
+        //prompts user for what they want to do(View accounts, Withdraw/Deposit, Delete Account, log out), if input doesn't
+        //match then user is redirected here, being able to view the valid commands
         System.out.println("===== Bank Menu =====");
         AccountRepo arepo = new AccountRepo();
         AccountModel amodel = new AccountModel();
@@ -18,8 +20,6 @@ public class BankMenu extends View{
         model.setAccountName(repo.read(model.getId()).getAccountName());
         model.setBalance(repo.read(model.getId()).getBalance());
 
-
-
         System.out.println("Enter one of the following commands: ");
         System.out.println("1 - List accounts");
         System.out.println("2 - Withdraw/Deposit Money");
@@ -29,14 +29,17 @@ public class BankMenu extends View{
 
 switch(in) {
     case "1":
+        //Lists all accounts associated with account ID and their respective balances
        repo.readAll(model.getId());
         break;
     case "2":
+        //prompts user for which account they want to make changes to, then asks whether they want to make a withdrawal
+        // or a deposit
         System.out.println("Which account would you like to alter?");
         in = viewManager.getScanner().nextLine();
         if(!amodel.getId().equals(repo.read(in).getId())){
             System.out.println("You do not have an account with that name.");
-            viewManager.quit();
+            viewManager.navigate("BankMenu");
             return;
         }
         model.setAccountName(repo.read(in).getAccountName());
@@ -66,6 +69,7 @@ switch(in) {
         }
         break;
     case "3":
+        //Deletes both of the user's account and bank accounts
         System.out.println("WARNING! This will delete all of your banking accounts. \n Are you sure? (Y/N)");
         String confirm = viewManager.getScanner().nextLine();
        if(confirm.equals("Y")) {

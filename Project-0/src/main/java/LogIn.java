@@ -8,13 +8,13 @@ public class LogIn extends View{
 
     @Override
     public void renderView(){
-        //prompt user to enter their login email
+        //prompt user to enter their login email and corresponding password, then if both are valid/match,
+        //redirect user to the next menu "AccountMenu"
         System.out.println("===== Log In =====");
         System.out.println("Enter your account's email address: ");
 
         AccountRepo repo = new AccountRepo();
 
-//verify that there is an account with that email
        email = viewManager.getScanner().nextLine();
 
        //checks to see if email is in database, if not then it redirects to create an account
@@ -33,7 +33,6 @@ public class LogIn extends View{
             return;
         }
 
-        //navigate to AccountMenu after verifying login
         viewManager.navigate("AccountMenu");
     }
 }

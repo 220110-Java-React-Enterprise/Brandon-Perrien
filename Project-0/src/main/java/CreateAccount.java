@@ -1,3 +1,6 @@
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
+
 public class CreateAccount extends View{
     public CreateAccount(){
         viewName = "CreateAccount";
@@ -6,29 +9,21 @@ public class CreateAccount extends View{
 
     @Override
     public void renderView(){
-        //prompt user
+        //prompt user for details in order to create an account
         System.out.println("===== Create Account =====");
         System.out.println("Enter your Email Address: ");
 
-        //get input
         String in = viewManager.getScanner().nextLine();
 
         AccountModel accountModel = new AccountModel();
         AccountRepo repo = new AccountRepo();
 
-        //if email is not in the database, create the account. If it is, either throw error or just quit
+        //makes sure the entered email is valid
         if(VerifyEmail.verify(in)){
             accountModel.setEmail(in);
         }else{
             System.out.println("Invalid email address");
             viewManager.quit();
-            return;
-        }
-
-        AccountModel queryAccount = repo.read(accountModel.getEmail());
-       if(accountModel.getEmail().equals(queryAccount.getEmail())){
-            System.out.println("Email already has an account associated with it. Redirecting to LogIn Menu");
-            viewManager.navigate("LogIn");
             return;
         }
 
@@ -39,7 +34,6 @@ public class CreateAccount extends View{
         if(VerifyName.verify(in)) {
             accountModel.setFirstName(in);
         }else{
-            //this might need to be switched to exception instead of a println
             System.out.println("First Name can only contain letters");
             viewManager.quit();
             return;
@@ -50,7 +44,6 @@ public class CreateAccount extends View{
         if (VerifyName.verify(in)) {
             accountModel.setLastName(in);
         }else{
-            //this might need to be an exception
             System.out.println("Last Name can only contain letters");
             viewManager.quit();
             return;
@@ -59,7 +52,6 @@ public class CreateAccount extends View{
         System.out.println("Create a Password (This must have between 7 and 50 characters): ");
         in = viewManager.getScanner().nextLine();
         if(in.length() < 7 | in.length() > 50){
-            //this might need to be an exception instead
             System.out.println("Password has an invalid amount of characters");
             viewManager.quit();
             return;
@@ -68,7 +60,11 @@ public class CreateAccount extends View{
         }
 
         //Creates the account in the database, then quits, rerun the program to login
-        repo.create(accountModel);
+        try {
+            repo.create(accountModel);
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
         System.out.println("Account Created. Try Logging In.");
         viewManager.quit();
     }

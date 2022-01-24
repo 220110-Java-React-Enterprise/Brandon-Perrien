@@ -4,15 +4,15 @@ public class MainMenu extends View {
         viewName = "MainMenu";
         viewManager = ViewManager.getViewManager();
     }
-//Need to change renderView later
+
     @Override
     public void renderView(){
-        //prompt user
+        //prompt user for whether they want to create an account or login to an existing one, then navigates to the
+        //corresponding view
         System.out.println("===== Main Menu =====");
         System.out.println("Enter 1 to Create an Account");
         System.out.println("Enter 2 to Login to an existing Account");
 
-        //get input
         String in = viewManager.getScanner().nextLine();
 
         //Navigate to next menus, or exit if wrong command inputted

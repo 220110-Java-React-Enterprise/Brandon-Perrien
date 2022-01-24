@@ -2,7 +2,7 @@ CREATE TABLE accounts(
 account_id INT AUTO_INCREMENT,
 first_name VARCHAR(50),
 last_name VARCHAR(50),
-email VARCHAR(50),
+email VARCHAR(50) UNIQUE,
 password VARCHAR(50),
 CONSTRAINT accounts_pk PRIMARY KEY (account_id)
 );

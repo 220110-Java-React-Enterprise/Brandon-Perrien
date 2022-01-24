@@ -1,8 +1,9 @@
 public class BalanceModel {
+    //POJO, has getters/setters and methods for withdraw/deposit
     private Integer id;
     private String accountName;
     private Double balance;
-
+//empty constructor
     public BalanceModel(){
     }
 
@@ -13,6 +14,7 @@ public class BalanceModel {
 
 
     public void withdraw(Double d){
+        //Withdraws money from a balance of an account. Makes sure you can't do anything weird
         if(d > 0){
             if(balance - d > 0){
                 balance = balance - d;
@@ -26,6 +28,7 @@ public class BalanceModel {
     }
 
     public void deposit(Double d){
+        //Adds money to a balance of an account, can't deposit a negative amount
         if(d > 0){
             balance = balance + d;
             setBalance(balance);

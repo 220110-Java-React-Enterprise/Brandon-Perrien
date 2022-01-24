@@ -6,14 +6,13 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public class ConnectionManager {
-    //this is for keeping a connection object alive and referenced and it will be used by this class
+    //this is for keeping a connection object alive and referenced, and it will be used by this class
     private static Connection connection;
     //private because no one else should access this field directly - abstraction
-    //static because we will never instantiate an objct of this class, we just use the static functionality
+    //static because we will never instantiate an object of this class, we just use the static functionality
     //Connection is an object that stores and keeps alive a connection to a database
 
 private ConnectionManager(){
-
 }
 
     //this is a method to grab the connection above. Note that it works like a singleton, if there is
@@ -44,7 +43,6 @@ private ConnectionManager(){
             FileReader fr = new FileReader("src/main/resources/jdbc.properties");
             props.load(fr);
 
-
             //next we concatenate the parts of our string so that it is complete and fully qualified
             String connectionString = "jdbc:mariadb://" +
                     props.getProperty("hostname") + ":" +
@@ -52,7 +50,6 @@ private ConnectionManager(){
                     props.getProperty("dbname") + "?user=" +
                     props.getProperty("username") + "&password=" +
                     props.getProperty("password");
-
 
             connection = DriverManager.getConnection(connectionString);
 

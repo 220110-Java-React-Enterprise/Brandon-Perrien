@@ -25,7 +25,7 @@ public class ViewManager {
     }
 
     public void navigate(String destination) {
-        //navigates to view at destination
+        //navigates to view named destination
         for (int i = 0; i < viewList.size(); i++) {
             View temp = viewList.get(i);
            if (temp.viewName.equals(destination)) {
@@ -33,10 +33,11 @@ public class ViewManager {
             }
         }
     }
+    //adds view to arraylist
         public void registerView(View view){
             viewList.add(view);
         }
-
+//Renders the next view
         public void render(){
             nextView.renderView();
         }

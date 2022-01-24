@@ -10,7 +10,7 @@ public class BalanceRepo implements DataSourceCRUD<BalanceModel> {
     }
 
     @Override
-    public BalanceModel create(BalanceModel model) {
+    public BalanceModel create(BalanceModel model) throws SQLException {
         //JDBC logic
         //Sql statement that adds data to a table
 
@@ -31,7 +31,7 @@ public class BalanceRepo implements DataSourceCRUD<BalanceModel> {
 
 
     public BalanceModel read(String s) {
-        //reads/returns values for given account_name).
+        //reads/returns values for given account_name. This is an overloaded version of the inherited read function
         try {
             String sql = "SELECT * FROM bank_accounts WHERE account_name = ?";
             PreparedStatement pstmt = connection.prepareStatement(sql);
@@ -54,7 +54,7 @@ public class BalanceRepo implements DataSourceCRUD<BalanceModel> {
 
     @Override
     public BalanceModel read(Integer id) {
-        //reads/returns values for given email.
+        //reads/returns values for given account id.
         try {
             String sql = "SELECT * FROM bank_accounts WHERE account_id = ?";
             PreparedStatement pstmt = connection.prepareStatement(sql);
@@ -75,7 +75,7 @@ public class BalanceRepo implements DataSourceCRUD<BalanceModel> {
     }
 
     public BalanceModel readAll(Integer id) {
-        //prints all bank accounts and their balances
+        //prints all bank accounts and their balances for a given account id
         try {
             String sql = "SELECT * From bank_accounts WHERE account_id = ? ORDER BY balance ASC";
             PreparedStatement pstmt = connection.prepareStatement(sql);
@@ -97,7 +97,7 @@ public class BalanceRepo implements DataSourceCRUD<BalanceModel> {
 
     @Override
     public BalanceModel update(BalanceModel model){
-        //Updates/Changes table data member
+        //Updates/Changes balance for a given account name
         try{
             String sql = "UPDATE bank_accounts SET balance = ? WHERE account_name = ?";
             PreparedStatement pstmt = connection.prepareStatement(sql);
@@ -112,7 +112,7 @@ public class BalanceRepo implements DataSourceCRUD<BalanceModel> {
     }
     @Override
     public void delete(Integer id){
-        //deletes row in table at id
+        //deletes row(s) in table at a given account id
         try{
             String sql = "DELETE FROM bank_accounts WHERE account_id = ?";
             PreparedStatement pstmt = connection.prepareStatement(sql);

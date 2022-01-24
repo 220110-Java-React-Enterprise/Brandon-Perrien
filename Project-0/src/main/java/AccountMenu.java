@@ -1,3 +1,5 @@
+import java.sql.SQLException;
+
 public class AccountMenu extends View{
     public AccountMenu(){
         viewName = "AccountMenu";
@@ -6,7 +8,7 @@ public class AccountMenu extends View{
 
     @Override
     public void renderView() {
-        //prompt user
+        //prompt user to enter a command relating to an action(view bank accounts, add bank accounts, update info, logout)
         System.out.println("===== Account Menu =====");
         System.out.println("Enter one of the following commands: ");
         System.out.println("1 - View bank accounts");
@@ -23,9 +25,11 @@ public class AccountMenu extends View{
 
         switch(in){
             case "1":
+                //navigates to the bank menu which allows user to view their bank accounts and make changes to their balances
                viewManager.navigate("BankMenu");
                 break;
             case "2":
+                //creates a bank account with a unique name(provided by user) and a balance of $0.00
                 model.setBalance(0.00);
                 System.out.println("Enter a name for this bank account: ");
                 in = viewManager.getScanner().nextLine();
@@ -36,10 +40,15 @@ public class AccountMenu extends View{
                 }
                 model.setAccountName(in);
                 model.setId(arepo.read(LogIn.email).getId());
-                repo.create(model);
+                try {
+                    repo.create(model);
+                }catch(SQLException e){
+                    e.printStackTrace();
+                }
                 System.out.println("Bank account added.");
                 break;
             case "3":
+                //Allows user to change firstname, lastname, and password associated with account id/email
                 amodel.setId(arepo.read(LogIn.email).getId());
 
                 System.out.println("Enter your First Name: ");
@@ -58,24 +67,6 @@ public class AccountMenu extends View{
                     amodel.setLastName(in);
                 }else{
                     System.out.println("First Name can only contain letters");
-                    viewManager.quit();
-                    return;
-                }
-
-                System.out.println("Enter your current email or a new one: ");
-                in = viewManager.getScanner().nextLine();
-                AccountModel queryAccount = arepo.read(in);
-
-                if (VerifyEmail.verify(in)) {
-                    amodel.setEmail(in);
-                } else {
-                    System.out.println("Invalid email address");
-                    viewManager.quit();
-                    return;
-                }
-
-                if(!in.equals(LogIn.email) & amodel.getEmail().equals(queryAccount.getEmail())){
-                    System.out.println("Email address already in use.");
                     viewManager.quit();
                     return;
                 }

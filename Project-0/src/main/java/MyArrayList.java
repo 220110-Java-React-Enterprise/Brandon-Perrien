@@ -1,4 +1,3 @@
-
 /**
  * A fairly simple arraylist implementation extending custom list interface.
  * Default size is 2, grows by size * 2 when needed.
@@ -6,12 +5,12 @@
  *
  * @param <E>
  */
-//go through and comment out/delete methods that aren't used
 public class MyArrayList<E> implements MyListInterface<E> {
     private Object[] array;
     private int size;
     private int maxSize;
 
+    //didn't use two of the constructors, or the contains/remove/clear methods, so I removed them
     /**
      * Default constructor, creates an empty underlying array with maxSize 2
      */
@@ -20,31 +19,6 @@ public class MyArrayList<E> implements MyListInterface<E> {
         size = 0;
         array = new Object[maxSize];
     }
-
-    /**
-     * Sized constructor, creates an empty object with maxSize size
-     * @param size the initial size of the underlying array
-     */
-    public MyArrayList(int size) {
-        maxSize = size;
-        size = 0;
-        array = new Object[maxSize];
-    }
-
-    /**
-     * Element list constructor, takes in variable number of objects and creates an underlying
-     * array large enough to fit them.
-     * @param e
-     */
-    public MyArrayList(E ...e) {
-        maxSize = size = e.length;
-        array = new Object[size];
-
-        for (int i = 0; i < size; ++i) {
-            array[i] = e[i];
-        }
-    }
-
 
     /**
      * Adds an object to the underlying array after all previously added objects.
@@ -102,9 +76,6 @@ public class MyArrayList<E> implements MyListInterface<E> {
         }
     }
 
-
-
-
     /**
      * gets the object located at supplied index
      * @param index index of object to get
@@ -117,60 +88,6 @@ public class MyArrayList<E> implements MyListInterface<E> {
             return (E) array[index];
         }else{
             throw new IndexOutOfBoundsException("You know what you did.");
-        }
-
-
-    }
-
-    /**
-     * Emptys the underlying array by setting it's private reference to null and allowing
-     * the old array to be garbage collected.
-     */
-    @Override
-    public void clear() {
-        maxSize = 2;
-        size = 0;
-        array = new Object[maxSize];
-
-    }
-
-    /**
-     * Check if object o is found within underlying array, using Object.equals() method
-     * @param o object to search for
-     * @return index location of first instance of matching object. -1 if not found.
-     */
-    @Override
-    public int contains(Object o) {
-        for(int i = 0; i < size; i++){
-            if(o.equals(array[i])){
-                return i;
-            }
-        }
-        return -1;
-
-    }
-
-    /**
-     * Removes object at specified index from underlying array.
-     * will shift array, making it smaller
-     * @param index index of object to remove from array
-     */
-    @Override
-    public void remove(int index) {
-        if(index <= size) {
-            array[index] = null;
-            if (index < size - 1) {
-                Object[] tempArray = array;
-                array = new Object[maxSize];
-                for (int i = 0; i < size; i++) {
-                    array[i] = tempArray[i];
-                    if (array[i] == null) {
-                        array[i] = tempArray[i + 1];
-                        tempArray[i + 1] = null;
-                    }
-                }
-            }
-            size--;
         }
     }
 

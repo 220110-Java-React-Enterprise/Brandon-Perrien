@@ -1,4 +1,5 @@
 public class AccountModel {
+    //POJO, has getters/setters
     private Integer id;
     private String firstName;
     private String lastName;

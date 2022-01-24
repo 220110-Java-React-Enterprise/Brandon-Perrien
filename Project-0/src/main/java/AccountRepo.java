@@ -10,7 +10,7 @@ public class AccountRepo implements DataSourceCRUD<AccountModel> {
     }
 
     @Override
-    public AccountModel create(AccountModel model){
+    public AccountModel create(AccountModel model) throws SQLException{
         //JDBC logic
         //Sql statement that adds data to a table
 
@@ -28,7 +28,7 @@ public class AccountRepo implements DataSourceCRUD<AccountModel> {
         }
         return model;
     }
-    //Overloaded read method, so that email works aswell
+    //Overloaded read method, so that read method works when given email instead of account id
     public AccountModel read(String s) {
         //reads/returns values for given email.
         try {
@@ -54,9 +54,8 @@ public class AccountRepo implements DataSourceCRUD<AccountModel> {
     }
 
 @Override
-
     public AccountModel read(Integer id) {
-        //reads/returns values for given email.
+        //reads/returns values for given account id.
         try {
             String sql = "SELECT * FROM accounts WHERE account_id = ?";
             PreparedStatement pstmt = connection.prepareStatement(sql);
@@ -81,15 +80,14 @@ public class AccountRepo implements DataSourceCRUD<AccountModel> {
 
     @Override
     public AccountModel update(AccountModel model){
-        //Updates/Changes table data member
+        //Updates/Changes firstname, lastname, and password for a given account id
         try{
-            String sql = "UPDATE accounts SET first_name = ?, last_name = ?, email = ?, password = ? WHERE account_id = ?";
+            String sql = "UPDATE accounts SET first_name = ?, last_name = ?, password = ? WHERE account_id = ?";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setString(1, model.getFirstName());
             pstmt.setString(2, model.getLastName());
-            pstmt.setString(3, model.getEmail());
-            pstmt.setString(4, model.getPassword());
-            pstmt.setInt(5, model.getId());
+            pstmt.setString(3, model.getPassword());
+            pstmt.setInt(4, model.getId());
 
             pstmt.executeUpdate();
         }catch(SQLException e){
