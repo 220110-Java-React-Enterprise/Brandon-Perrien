@@ -2,19 +2,19 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-public class BalanceRepo implements DataSourceCRUD<BalanceModel>{
+public class BalanceRepo implements DataSourceCRUD<BalanceModel> {
     private final Connection connection;
 
-    public BalanceRepo(){
+    public BalanceRepo() {
         connection = ConnectionManager.getConnection();
     }
 
     @Override
-    public BalanceModel create(BalanceModel model){
+    public BalanceModel create(BalanceModel model) {
         //JDBC logic
         //Sql statement that adds data to a table
 
-        try{
+        try {
             String sql = "INSERT INTO bank_accounts (account_id, account_name, balance) VALUES (?,?,?)";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setInt(1, model.getId());
@@ -23,7 +23,7 @@ public class BalanceRepo implements DataSourceCRUD<BalanceModel>{
 
             pstmt.executeUpdate();
 
-        }catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return model;
@@ -46,12 +46,13 @@ public class BalanceRepo implements DataSourceCRUD<BalanceModel>{
                 model.setId(rs.getInt("account_id"));
             }
             return model;
-        }catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
     }
-@Override
+
+    @Override
     public BalanceModel read(Integer id) {
         //reads/returns values for given email.
         try {
@@ -67,7 +68,28 @@ public class BalanceRepo implements DataSourceCRUD<BalanceModel>{
                 model.setBalance(rs.getDouble("balance"));
             }
             return model;
-        }catch(SQLException e){
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public BalanceModel readAll(Integer id) {
+        //prints all bank accounts and their balances
+        try {
+            String sql = "SELECT * From bank_accounts WHERE account_id = ? ORDER BY balance ASC";
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            pstmt.setInt(1, id);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            BalanceModel model = new BalanceModel();
+            while (rs.next()) {
+                model.setAccountName(rs.getString("account_name"));
+                model.setBalance(rs.getDouble("balance"));
+                System.out.println(model.getAccountName() + "'s balance is: $" + model.getBalance());
+            }
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;

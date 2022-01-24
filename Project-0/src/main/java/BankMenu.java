@@ -29,9 +29,7 @@ public class BankMenu extends View{
 
 switch(in) {
     case "1":
-        System.out.println(amodel.getId());
-        System.out.println(repo.read(model.getId()).getAccountName());
-        System.out.println(model.getAccountName() + "'s Balance: $" + model.getBalance());
+       repo.readAll(model.getId());
         break;
     case "2":
         System.out.println("Which account would you like to alter?");
@@ -72,6 +70,7 @@ switch(in) {
         String confirm = viewManager.getScanner().nextLine();
        if(confirm.equals("Y")) {
             repo.delete(model.getId());
+            arepo.delete(amodel.getId());
             System.out.println("Deletion successful.");
             viewManager.quit();
         }else{
@@ -81,9 +80,6 @@ switch(in) {
     case "4":
         viewManager.quit();
         break;
-    default:
-        //Navigate back here as default case
-        viewManager.navigate("AccountMenu");
 }
 viewManager.navigate("BankMenu");
     }

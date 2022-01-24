@@ -9,7 +9,6 @@ CONSTRAINT accounts_pk PRIMARY KEY (account_id)
 
 CREATE TABLE bank_accounts(
 account_id INT NOT NULL,
-email VARCHAR(50),
 account_name VARCHAR(50),
 balance DECIMAL (10, 2),
 CONSTRAINT bank_accounts_pk PRIMARY KEY (account_name),
@@ -21,3 +20,5 @@ DROP TABLE bank_accounts;
 
 SELECT * FROM accounts;
 SELECT * FROM bank_accounts;
+
+
