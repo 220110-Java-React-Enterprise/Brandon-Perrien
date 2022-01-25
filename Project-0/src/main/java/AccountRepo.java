@@ -13,7 +13,6 @@ public class AccountRepo implements DataSourceCRUD<AccountModel> {
     public AccountModel create(AccountModel model) throws SQLException{
         //JDBC logic
         //Sql statement that adds data to a table
-
         try{
             String sql = "INSERT INTO accounts (first_name, last_name, email, password) VALUES (?,?,?,?)";
             PreparedStatement pstmt = connection.prepareStatement(sql);
@@ -53,7 +52,7 @@ public class AccountRepo implements DataSourceCRUD<AccountModel> {
         return null;
     }
 
-@Override
+    @Override
     public AccountModel read(Integer id) {
         //reads/returns values for given account id.
         try {
@@ -95,16 +94,16 @@ public class AccountRepo implements DataSourceCRUD<AccountModel> {
         }
         return model;
     }
-@Override
+    @Override
     public void delete(Integer id){
         //deletes row in table at id
-    try{
-        String sql = "DELETE FROM accounts WHERE account_id = ?";
-        PreparedStatement pstmt = connection.prepareStatement(sql);
-        pstmt.setInt(1, id);
-        pstmt.executeUpdate();
-    }catch(SQLException e){
-        e.printStackTrace();
+        try{
+            String sql = "DELETE FROM accounts WHERE account_id = ?";
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            pstmt.setInt(1, id);
+            pstmt.executeUpdate();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
     }
-}
 }

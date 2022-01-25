@@ -14,8 +14,7 @@ public class LogIn extends View{
         System.out.println("Enter your account's email address: ");
 
         AccountRepo repo = new AccountRepo();
-
-       email = viewManager.getScanner().nextLine();
+        email = viewManager.getScanner().nextLine();
 
        //checks to see if email is in database, if not then it redirects to create an account
         if(repo.read(email).getEmail() == null){
@@ -32,7 +31,6 @@ public class LogIn extends View{
             viewManager.quit();
             return;
         }
-
         viewManager.navigate("AccountMenu");
     }
 }

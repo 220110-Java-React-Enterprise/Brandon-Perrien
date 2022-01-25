@@ -52,7 +52,6 @@ public class ViewManager {
             scanner.close();
             running = false;
         }
-
         public boolean isRunning(){
             return running;
         }

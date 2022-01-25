@@ -13,7 +13,6 @@ public class BalanceRepo implements DataSourceCRUD<BalanceModel> {
     public BalanceModel create(BalanceModel model) throws SQLException {
         //JDBC logic
         //Sql statement that adds data to a table
-
         try {
             String sql = "INSERT INTO bank_accounts (account_id, account_name, balance) VALUES (?,?,?)";
             PreparedStatement pstmt = connection.prepareStatement(sql);
@@ -28,7 +27,6 @@ public class BalanceRepo implements DataSourceCRUD<BalanceModel> {
         }
         return model;
     }
-
 
     public BalanceModel read(String s) {
         //reads/returns values for given account_name. This is an overloaded version of the inherited read function

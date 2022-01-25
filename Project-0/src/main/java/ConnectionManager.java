@@ -11,9 +11,8 @@ public class ConnectionManager {
     //private because no one else should access this field directly - abstraction
     //static because we will never instantiate an object of this class, we just use the static functionality
     //Connection is an object that stores and keeps alive a connection to a database
-
-private ConnectionManager(){
-}
+    private ConnectionManager(){
+    }
 
     //this is a method to grab the connection above. Note that it works like a singleton, if there is
     //a connection we return that, otherwise create it and then return it.
@@ -52,11 +51,9 @@ private ConnectionManager(){
                     props.getProperty("password");
 
             connection = DriverManager.getConnection(connectionString);
-
         } catch (IOException | SQLException e) {
             e.printStackTrace();
         }
-
         return connection;
     }
 }

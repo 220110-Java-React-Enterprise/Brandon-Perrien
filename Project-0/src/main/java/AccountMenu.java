@@ -17,7 +17,6 @@ public class AccountMenu extends View{
         System.out.println("4 - Log Out");
 
         String in = viewManager.getScanner().nextLine();
-
         AccountRepo arepo = new AccountRepo();
         AccountModel amodel = new AccountModel();
         BalanceModel model = new BalanceModel();

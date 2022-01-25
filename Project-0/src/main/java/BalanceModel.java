@@ -3,7 +3,7 @@ public class BalanceModel {
     private Integer id;
     private String accountName;
     private Double balance;
-//empty constructor
+
     public BalanceModel(){
     }
 
@@ -11,7 +11,6 @@ public class BalanceModel {
         this.accountName = accountName;
         this.balance = balance;
     }
-
 
     public void withdraw(Double d){
         //Withdraws money from a balance of an account. Makes sure you can't do anything weird

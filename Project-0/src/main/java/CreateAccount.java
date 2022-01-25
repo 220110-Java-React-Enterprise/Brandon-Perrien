@@ -1,5 +1,4 @@
 import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
 
 public class CreateAccount extends View{
     public CreateAccount(){
@@ -14,7 +13,6 @@ public class CreateAccount extends View{
         System.out.println("Enter your Email Address: ");
 
         String in = viewManager.getScanner().nextLine();
-
         AccountModel accountModel = new AccountModel();
         AccountRepo repo = new AccountRepo();
 
@@ -27,8 +25,7 @@ public class CreateAccount extends View{
             return;
         }
 
-        //prompt user for the rest of their data, then add their info to the database,
-        // and then redirect them to the account details menu
+        //prompt user for the rest of their data, then add their info to the database
         System.out.println("Enter your First Name: ");
         in = viewManager.getScanner().nextLine();
         if(VerifyName.verify(in)) {
@@ -59,13 +56,13 @@ public class CreateAccount extends View{
             accountModel.setPassword(in);
         }
 
-        //Creates the account in the database, then quits, rerun the program to login
+        //Creates the account in the database, then redirects user to login menu
         try {
             repo.create(accountModel);
         }catch(SQLException e){
             e.printStackTrace();
         }
         System.out.println("Account Created. Try Logging In.");
-        viewManager.quit();
+        viewManager.navigate("LogIn");
     }
 }

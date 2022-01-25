@@ -1,4 +1,3 @@
-
 public class MainMenu extends View {
     public MainMenu(){
         viewName = "MainMenu";
