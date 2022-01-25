@@ -15,7 +15,7 @@ public class BalanceModel {
     public void withdraw(Double d){
         //Withdraws money from a balance of an account. Makes sure you can't do anything weird
         if(d > 0){
-            if(balance - d > 0){
+            if(balance - d >= 0){
                 balance = balance - d;
                 setBalance(balance);
             }else{
