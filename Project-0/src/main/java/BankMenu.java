@@ -1,4 +1,6 @@
+import java.text.NumberFormat;
 public class BankMenu extends View{
+    NumberFormat currency = NumberFormat.getCurrencyInstance();
     public BankMenu(){
         viewName = "BankMenu";
         viewManager = ViewManager.getViewManager();
@@ -51,16 +53,16 @@ public class BankMenu extends View{
                         Double d = Double.valueOf(viewManager.getScanner().nextLine());
                         model.deposit(d);
                         repo.update(model);
-                        System.out.println(model.getAccountName() + "'s balance is now: $" +
-                                repo.read(model.getAccountName()).getBalance());
+                        System.out.println(model.getAccountName() + "'s balance is now: " +
+                                currency.format(repo.read(model.getAccountName()).getBalance()));
                         break;
                     case "2":
                         System.out.println("How much would you like to withdraw?:");
                         d = Double.valueOf(viewManager.getScanner().nextLine());
                         model.withdraw(d);
                         repo.update(model);
-                        System.out.println(model.getAccountName() + "'s balance is now: $" +
-                                repo.read(model.getAccountName()).getBalance());
+                        System.out.println(model.getAccountName() + "'s balance is now: " +
+                                currency.format(repo.read(model.getAccountName()).getBalance()));
                         break;
                     default:
                         System.out.println("Going back to Bank Menu");

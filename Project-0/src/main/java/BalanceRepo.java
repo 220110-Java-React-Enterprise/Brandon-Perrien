@@ -2,8 +2,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.NumberFormat;
 public class BalanceRepo implements DataSourceCRUD<BalanceModel> {
     private final Connection connection;
+    NumberFormat currency = NumberFormat.getCurrencyInstance();
 
     public BalanceRepo() {
         connection = ConnectionManager.getConnection();
@@ -85,7 +87,7 @@ public class BalanceRepo implements DataSourceCRUD<BalanceModel> {
             while (rs.next()) {
                 model.setAccountName(rs.getString("account_name"));
                 model.setBalance(rs.getDouble("balance"));
-                System.out.println(model.getAccountName() + "'s balance is: $" + model.getBalance());
+                System.out.println(model.getAccountName() + "'s balance is: " + currency.format(model.getBalance()));
             }
         } catch (SQLException e) {
             e.printStackTrace();
