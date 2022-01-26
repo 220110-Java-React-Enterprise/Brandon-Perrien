@@ -14,7 +14,7 @@ public class BalanceModel {
 
     public void withdraw(Double d){
         //Withdraws money from a balance of an account. Makes sure you can't do anything weird
-        if(d > 0){
+        if(d >= 0.01){
             if(balance - d >= 0){
                 balance = balance - d;
                 setBalance(balance);
@@ -28,7 +28,7 @@ public class BalanceModel {
 
     public void deposit(Double d){
         //Adds money to a balance of an account, can't deposit a negative amount
-        if(d > 0){
+        if(d >= 0.01){
             balance = balance + d;
             setBalance(balance);
         }else{

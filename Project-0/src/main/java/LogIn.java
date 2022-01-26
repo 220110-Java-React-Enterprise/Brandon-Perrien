@@ -13,7 +13,7 @@ public class LogIn extends View{
         System.out.println("===== Log In =====");
         System.out.println("Enter your account's email address: ");
 
-        AccountRepo repo = new AccountRepo();
+        UserRepo repo = new UserRepo();
         email = viewManager.getScanner().nextLine();
 
        //checks to see if email is in database, if not then it redirects to create an account

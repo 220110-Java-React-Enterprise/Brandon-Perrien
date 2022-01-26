@@ -10,8 +10,8 @@ public class BankMenu extends View{
         //match then user is redirected here, being able to view the valid commands
         System.out.println("===== Bank Menu =====");
         //Retrieving Account information
-        AccountRepo arepo = new AccountRepo();
-        AccountModel amodel = new AccountModel();
+        UserRepo arepo = new UserRepo();
+        UserModel amodel = new UserModel();
         BalanceModel model = new BalanceModel();
         BalanceRepo repo = new BalanceRepo();
         amodel.setId(arepo.read(LogIn.email).getId());

@@ -2,19 +2,19 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-public class AccountRepo implements DataSourceCRUD<AccountModel> {
+public class UserRepo implements DataSourceCRUD<UserModel> {
     private final Connection connection;
 
-    public AccountRepo(){
+    public UserRepo(){
         connection = ConnectionManager.getConnection();
     }
 
     @Override
-    public AccountModel create(AccountModel model) throws SQLException{
+    public UserModel create(UserModel model) throws SQLException{
         //JDBC logic
         //Sql statement that adds data to a table
         try{
-            String sql = "INSERT INTO accounts (first_name, last_name, email, password) VALUES (?,?,?,?)";
+            String sql = "INSERT INTO users (first_name, last_name, email, password) VALUES (?,?,?,?)";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setString(1, model.getFirstName());
             pstmt.setString(2, model.getLastName());
@@ -28,18 +28,18 @@ public class AccountRepo implements DataSourceCRUD<AccountModel> {
         return model;
     }
     //Overloaded read method, so that read method works when given email instead of account id
-    public AccountModel read(String s) {
+    public UserModel read(String s) {
         //reads/returns values for given email.
         try {
-            String sql = "SELECT * FROM accounts WHERE email = ?";
+            String sql = "SELECT * FROM users WHERE email = ?";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setString(1, s);
 
             ResultSet rs = pstmt.executeQuery();
 
-            AccountModel model = new AccountModel();
+            UserModel model = new UserModel();
             while (rs.next()) {
-                model.setId(rs.getInt("account_id"));
+                model.setId(rs.getInt("user_id"));
                 model.setFirstName(rs.getString("first_name"));
                 model.setLastName(rs.getString("last_name"));
                 model.setEmail(rs.getString("email"));
@@ -53,18 +53,18 @@ public class AccountRepo implements DataSourceCRUD<AccountModel> {
     }
 
     @Override
-    public AccountModel read(Integer id) {
+    public UserModel read(Integer id) {
         //reads/returns values for given account id.
         try {
-            String sql = "SELECT * FROM accounts WHERE account_id = ?";
+            String sql = "SELECT * FROM users WHERE user_id = ?";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setInt(1, id);
 
             ResultSet rs = pstmt.executeQuery();
 
-            AccountModel model = new AccountModel();
+            UserModel model = new UserModel();
             while (rs.next()) {
-                model.setId(rs.getInt("account_id"));
+                model.setId(rs.getInt("user_id"));
                 model.setFirstName(rs.getString("first_name"));
                 model.setLastName(rs.getString("last_name"));
                 model.setEmail(rs.getString("email"));
@@ -78,10 +78,10 @@ public class AccountRepo implements DataSourceCRUD<AccountModel> {
     }
 
     @Override
-    public AccountModel update(AccountModel model){
+    public UserModel update(UserModel model){
         //Updates/Changes firstname, lastname, and password for a given account id
         try{
-            String sql = "UPDATE accounts SET first_name = ?, last_name = ?, password = ? WHERE account_id = ?";
+            String sql = "UPDATE users SET first_name = ?, last_name = ?, password = ? WHERE user_id = ?";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setString(1, model.getFirstName());
             pstmt.setString(2, model.getLastName());
@@ -98,7 +98,7 @@ public class AccountRepo implements DataSourceCRUD<AccountModel> {
     public void delete(Integer id){
         //deletes row in table at id
         try{
-            String sql = "DELETE FROM accounts WHERE account_id = ?";
+            String sql = "DELETE FROM users WHERE user_id = ?";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setInt(1, id);
             pstmt.executeUpdate();

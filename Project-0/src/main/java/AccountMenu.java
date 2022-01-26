@@ -17,8 +17,8 @@ public class AccountMenu extends View{
         System.out.println("4 - Log Out");
 
         String in = viewManager.getScanner().nextLine();
-        AccountRepo arepo = new AccountRepo();
-        AccountModel amodel = new AccountModel();
+        UserRepo arepo = new UserRepo();
+        UserModel amodel = new UserModel();
         BalanceModel model = new BalanceModel();
         BalanceRepo repo = new BalanceRepo();
 
@@ -33,7 +33,7 @@ public class AccountMenu extends View{
                 System.out.println("Enter a name for this bank account: ");
                 in = viewManager.getScanner().nextLine();
                 if(in.equals(repo.read(in).getAccountName())){
-                    System.out.println("An account already exists with that name");
+                   System.out.println("An account already exists with that name");
                     viewManager.quit();
                     return;
                 }

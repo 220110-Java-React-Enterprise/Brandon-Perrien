@@ -14,7 +14,7 @@ public class BalanceRepo implements DataSourceCRUD<BalanceModel> {
         //JDBC logic
         //Sql statement that adds data to a table
         try {
-            String sql = "INSERT INTO bank_accounts (account_id, account_name, balance) VALUES (?,?,?)";
+            String sql = "INSERT INTO accounts (user_id, account_name, balance) VALUES (?,?,?)";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setInt(1, model.getId());
             pstmt.setString(2, model.getAccountName());
@@ -31,7 +31,7 @@ public class BalanceRepo implements DataSourceCRUD<BalanceModel> {
     public BalanceModel read(String s) {
         //reads/returns values for given account_name. This is an overloaded version of the inherited read function
         try {
-            String sql = "SELECT * FROM bank_accounts WHERE account_name = ?";
+            String sql = "SELECT * FROM accounts WHERE account_name = ?";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setString(1, s);
 
@@ -41,7 +41,7 @@ public class BalanceRepo implements DataSourceCRUD<BalanceModel> {
             while (rs.next()) {
                 model.setAccountName(rs.getString("account_name"));
                 model.setBalance(rs.getDouble("balance"));
-                model.setId(rs.getInt("account_id"));
+                model.setId(rs.getInt("user_id"));
             }
             return model;
         } catch (SQLException e) {
@@ -54,7 +54,7 @@ public class BalanceRepo implements DataSourceCRUD<BalanceModel> {
     public BalanceModel read(Integer id) {
         //reads/returns values for given account id.
         try {
-            String sql = "SELECT * FROM bank_accounts WHERE account_id = ?";
+            String sql = "SELECT * FROM accounts WHERE user_id = ?";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setInt(1, id);
 
@@ -75,7 +75,7 @@ public class BalanceRepo implements DataSourceCRUD<BalanceModel> {
     public BalanceModel readAll(Integer id) {
         //prints all bank accounts and their balances for a given account id
         try {
-            String sql = "SELECT * From bank_accounts WHERE account_id = ? ORDER BY balance ASC";
+            String sql = "SELECT * FROM accounts WHERE user_id = ? ORDER BY balance ASC";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setInt(1, id);
 
@@ -97,7 +97,7 @@ public class BalanceRepo implements DataSourceCRUD<BalanceModel> {
     public BalanceModel update(BalanceModel model){
         //Updates/Changes balance for a given account name
         try{
-            String sql = "UPDATE bank_accounts SET balance = ? WHERE account_name = ?";
+            String sql = "UPDATE accounts SET balance = ? WHERE account_name = ?";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setDouble(1, model.getBalance());
             pstmt.setString(2, model.getAccountName());
@@ -112,7 +112,7 @@ public class BalanceRepo implements DataSourceCRUD<BalanceModel> {
     public void delete(Integer id){
         //deletes row(s) in table at a given account id
         try{
-            String sql = "DELETE FROM bank_accounts WHERE account_id = ?";
+            String sql = "DELETE FROM accounts WHERE user_id = ?";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setInt(1, id);
             pstmt.executeUpdate();

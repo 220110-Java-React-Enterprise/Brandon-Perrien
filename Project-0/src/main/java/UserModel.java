@@ -1,4 +1,4 @@
-public class AccountModel {
+public class UserModel {
     //POJO, has getters/setters
     private Integer id;
     private String firstName;
@@ -6,10 +6,10 @@ public class AccountModel {
     private String email;
     private String password;
 
-    public AccountModel(){
+    public UserModel(){
     }
 
-    public AccountModel(Integer id, String firstName, String lastName, String email, String password){
+    public UserModel(Integer id, String firstName, String lastName, String email, String password){
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;

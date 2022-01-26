@@ -13,12 +13,12 @@ public class CreateAccount extends View{
         System.out.println("Enter your Email Address: ");
 
         String in = viewManager.getScanner().nextLine();
-        AccountModel accountModel = new AccountModel();
-        AccountRepo repo = new AccountRepo();
+        UserModel userModel = new UserModel();
+        UserRepo repo = new UserRepo();
 
         //makes sure the entered email is valid
         if(VerifyEmail.verify(in)){
-            accountModel.setEmail(in);
+            userModel.setEmail(in);
         }else{
             System.out.println("Invalid email address");
             viewManager.quit();
@@ -29,7 +29,7 @@ public class CreateAccount extends View{
         System.out.println("Enter your First Name: ");
         in = viewManager.getScanner().nextLine();
         if(VerifyName.verify(in)) {
-            accountModel.setFirstName(in);
+            userModel.setFirstName(in);
         }else{
             System.out.println("First Name can only contain letters");
             viewManager.quit();
@@ -39,7 +39,7 @@ public class CreateAccount extends View{
         System.out.println("Enter your Last Name: ");
         in = viewManager.getScanner().nextLine();
         if (VerifyName.verify(in)) {
-            accountModel.setLastName(in);
+            userModel.setLastName(in);
         }else{
             System.out.println("Last Name can only contain letters");
             viewManager.quit();
@@ -53,12 +53,12 @@ public class CreateAccount extends View{
             viewManager.quit();
             return;
         }else {
-            accountModel.setPassword(in);
+            userModel.setPassword(in);
         }
 
         //Creates the account in the database, then redirects user to login menu
         try {
-            repo.create(accountModel);
+            repo.create(userModel);
         }catch(SQLException e){
             e.printStackTrace();
         }
